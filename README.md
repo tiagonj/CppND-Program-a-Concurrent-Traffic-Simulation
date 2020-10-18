@@ -37,3 +37,37 @@ When the project is built initially, all traffic lights will be green. When you 
 - **Task FP.4** : Implement the method `Send`, which should use the mechanisms `std::lock_guard<std::mutex>` as well as `_condition.notify_one()` to add a new message to the queue and afterwards send a notification. Also, in class `TrafficLight`, create a private member of type `MessageQueue` for messages of type `TrafficLightPhase` and use it within the infinite loop to push each new `TrafficLightPhase` into it by calling send in conjunction with move semantics.
 - **Task FP.5** : The method receive should use `std::unique_lock<std::mutex>` and `_condition.wait()` to wait for and receive new messages and pull them from the queue using move semantics. The received object should then be returned by the receive function. Then, add the implementation of the method `waitForGreen`, in which an infinite while-loop runs and repeatedly calls the `receive` function on the message queue. Once it receives `TrafficLightPhase::green`, the method returns.
 - **Task FP.6** : In class Intersection, add a private member `_trafficLight` of type `TrafficLight`. In method `Intersection::simulate()`, start the simulation of `_trafficLight`. Then, in method `Intersection::addVehicleToQueue`, use the methods `TrafficLight::getCurrentPhase` and `TrafficLight::waitForGreen` to block the execution until the traffic light turns green.
+
+
+# Project submission notes
+
+## Makefile
+
+A Makefile has been provided which provides the following options:
+
+* `make clean` removes the `./build` folder and all its contents
+* `make debug` builds the `./build/traffic_simulation` application
+* `make debug` builds the `./build/traffic_simulation` application using debug flags
+* `make run` runs the application
+
+
+## Development & testing environment
+
+This project has been developed and tested on a Ubuntu machine:
+
+```
+18.04.5 LTS (Bionic Beaver)
+Linux 5.4.0-48-generic #52~18.04.1-Ubuntu x86_64 GNU/Linux
+
+$ /usr/bin/cmake --version
+cmake version 3.18.1
+
+$ make --version
+GNU Make 4.1
+
+$ /usr/bin/c++ --version
+c++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+
+OpenCV 4.5 built from source
+(https://github.com/opencv/opencv hash 9c8626bf3cc74ec42d7d0583c484eef444a338a0)
+```
